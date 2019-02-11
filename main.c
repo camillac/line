@@ -30,18 +30,24 @@ int main() {
   origin[1] = 250;
 
   for (int x = 200; x >= 0; x-= 1){
-    c.red = MAX_COLOR - x;
+    // set to green
+    c.red = 0;
+    c.green = MAX_COLOR;
+    c.blue = 0;
     draw_line(origin[0], origin[1], origin[0] + x, origin[1] + circle(x, 200), s, c);
+    // set to yellow
+    c.red = MAX_COLOR;
+    c.green = 0;
     draw_line(origin[0], origin[1], origin[0] + x, origin[1] - circle(x, 200), s, c);
+    // set to yellow
+    c.green = MAX_COLOR;
     draw_line(origin[0], origin[1], origin[0] - x, origin[1] + circle(x, 200), s, c);
+    // set to blue
+    c.red = 0;
+    c.green = 0;
+    c.blue = MAX_COLOR;
     draw_line(origin[0], origin[1], origin[0] - x, origin[1] - circle(x, 200), s, c);
   }
-
-  c.red = MAX_COLOR;
-  c.green = 0;
-  c.blue = 0;
-
-  draw_line(249, 51, 250, 250, s, c);
 
   //display(s);
   save_extension(s, "lines.png");

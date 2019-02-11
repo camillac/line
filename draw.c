@@ -28,8 +28,8 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
   b = 2*(x0 - x1);
 
   // OCTANT I and V: if 0 <= m <= 1 (using a and b for convenience)
-  if (a == 0 || (a > 0 && a <= -b)){
-    printf("octant I or V: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
+  if (a >= 0 && a <= -b){
+    // printf("octant I or V: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
     d = 2*a + b;
     while (x <= x1){
       plot(s, c, x, y);
@@ -43,8 +43,8 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
   }
 
   // OCTANT II and VI: if m > 1 or undefined
-  else if ((-b == 0 && y0 < y1) || (a > -b)){
-    printf("octant II or VI: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
+  else if ((-b == 0 && y1 > y0) || (a > -b)){
+    // printf("octant II or VI: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
     d = a + 2*b;
     while (y <= y1){
       plot(s, c, x, y);
@@ -58,22 +58,22 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
   }
 
   // OCTANT VII and III: if m < -1
-  else if (abs(a) > abs(b) || (-b == 0 && y1 < y0)){
-    printf("octant VII or III: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
+  else if ((-b == 0 && y1 > y0) || abs(a) > abs(b)){
+    // printf("octant VII or III: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
     d = a - 2*b;
     while (y >= y1){
       plot(s, c, x, y);
-      if (d < 0){
+      if (d > 0){
         x++;
-        d -= a;
+        d += a;
       }
       y--;
-      d += b;
+      d -= b;
     }
   }
   // OCTANT VIII and IV: if -1 <= m < 0
   else {
-    printf("octant VIII or IV: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
+    // printf("octant VIII or IV: (%d,%d) -> (%d,%d)\n", x, y, x1, y1);
     d = 2*a - b;
     while (x <= x1){
       plot(s, c, x, y);
