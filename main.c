@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <time.h>
 
 #include "ml6.h"
 #include "display.h"
@@ -14,14 +13,8 @@ int circle(int x, int radius){
 
 int main() {
 
-  srand( time(NULL) );
-
   screen s;
   color c;
-
-  c.red = 0;
-  c.green = MAX_COLOR;
-  c.blue = 0;
 
   clear_screen(s);
 
